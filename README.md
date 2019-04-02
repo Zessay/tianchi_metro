@@ -1,10 +1,10 @@
-# <center>地铁乘客流量预测</center>
+# <center><span id="title">地铁乘客流量预测</span></center>
 
 
 Table of Contents
 =================
 
-   * [地铁乘客流量预测]()
+   * [地铁乘客流量预测](#title)
    * [1. 赛题分析和前期思路](#1)
       * [1.1 数据清洗]()
       * [1.2 特征工程]()
@@ -32,7 +32,7 @@ Table of Contents
 
 &emsp;比赛提供了1号到25号共25天的刷卡记录数据，所以第一步就是对每一天的文件进行处理。原始数据集中包含了`time`, `lineID`, `stationID`, `deviceID`, `status`, `userID`, `payType`这几个列，根据题目要求要预测进站和出站的人流量，所以要先统计出每一天的进站和出站流量。
 
-## <font size=3>1.1 数据清洗</font>
+## <font size=3><span id="1.1">1.1 数据清洗</span></font>
 
 >  **提取基础信息**
 
@@ -44,7 +44,7 @@ Table of Contents
 
 
 
-## <font size=3>1.2 特征工程</font>
+## <font size=3><span id="1.2">1.2 特征工程</span></font>
 
 > **增加同一站点相邻时间段的进出站流量信息**
 
@@ -110,19 +110,19 @@ Table of Contents
 
 
 
-## <font size=3>1.3 划分训练集和测试集</font>
+## <font size=3><span id="1.3">1.3 划分训练集和测试集</span></font>
 
 &emsp;根据上面数据清洗以及特征工程得到的结果对数据集进行划分。
 
 
 
-## <font size=3>1.4 搭建模型预测</font>
+## <font size=3><span id="1.4">1.4 搭建模型预测</span></font>
 
 &emsp;我们使用了LightGBM和CatBoost两个模型预测并取其均值，其实也可以尝试加入XGBoost，然后取3个模型的加权平均，但是我们当时训练时发现XGBoost得到的结果不是很好，所以直接丢掉了。其实，通过加权平均，给XGBoost的结果一个比较好的权重，也有可能会得到比较不错的结果。最后，<font color=blue>**对模型结果平均**</font>。
 
 
 
-# <font size=4>**2. 其他的一些想法**</font>
+# <font size=4><span id="2">2. 其他的一些想法</span></font>
 
 (1) 由于官方给了路网图，所以我们尝试将路网图拼接在特征后面，表示各个站点之间的连接关系，但是这样反而降低了模型最终的性能。
 
@@ -148,7 +148,7 @@ Table of Contents
 
 
 
-# <font size=4>3. 总结与思考</font>
+# <font size=4><span id="3">3. 总结与思考</span></font>
 
 (1) 首先是对数据的EDA做的不够，包括对各个站点的分析，各个时间段综合分析，对特征重要性的分析等等。主要还是因为经验不够，不知道该怎么做，甚至15站点的特殊性也是从交流群里得到的信息。另外，就是调参做的有问题，反而把模型的性能调低了，说明对参数的理解不够。
 
